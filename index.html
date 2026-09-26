@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #0f0;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #hud {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 14px;
+      text-shadow: 0 0 10px #0f0;
+      z-index: 10;
+    }
+
+    #hud div {
+      margin-bottom: 10px;
+    }
+
+    #crosshair {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border: 2px solid #0f0;
+      z-index: 10;
+    }
+
+    #crosshair::before,
+    #crosshair::after {
+      content: '';
+      position: absolute;
+      background: #0f0;
+    }
+
+    #crosshair::before {
+      width: 2px;
+      height: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      top: -12px;
+    }
+
+    #crosshair::after {
+      width: 2px;
+      height: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="hud">
+    <div>SPACE EXPLORER v0.1</div>
+    <div id="speed">Speed: 0.00</div>
+    <div id="position">Pos: (0, 0, 0)</div>
+  </div>
+  <div id="crosshair"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
