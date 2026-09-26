@@ -43,7 +43,8 @@ export function setupControls(player) {
   });
 
   window.addEventListener('mousemove', (e) => {
-    if (!mouseDown) return;
+    // Look while pointer is locked, or while dragging if lock isn't available
+    if (!mouseDown && document.pointerLockElement !== document.documentElement) return;
 
     const deltaX = e.movementX;
     const deltaY = e.movementY;

@@ -7,6 +7,7 @@ export function createPlayer() {
     forward: new THREE.Vector3(0, 0, -1),
     right: new THREE.Vector3(1, 0, 0),
     up: new THREE.Vector3(0, 1, 0),
+    quaternion: new THREE.Quaternion(),
 
     speed: 0,
     maxSpeed: 300,
@@ -55,7 +56,7 @@ export function createPlayer() {
 
       // Update rotation based on camera
       const euler = new THREE.Euler(this.pitch, this.yaw, 0, 'YXZ');
-      new THREE.Quaternion().setFromEuler(euler);
+      this.quaternion.setFromEuler(euler);
 
       this.forward = new THREE.Vector3(0, 0, -1).applyEuler(euler);
       this.right = new THREE.Vector3(1, 0, 0).applyEuler(euler);
