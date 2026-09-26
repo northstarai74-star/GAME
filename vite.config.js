@@ -5,6 +5,6 @@ export default {
   },
   build: {
     target: 'esnext',
-    minify: 'terser'
+    chunkSizeWarningLimit: 800
   }
 }

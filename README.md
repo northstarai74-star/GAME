@@ -1,78 +1,56 @@
 # Space Explorer - 3D Space Game
 
-A quick prototype 3D space exploration game built with Three.js and Vite.
+A third-person space combat game built with Three.js and Vite. Fly through an asteroid belt, fight waves of hostile drones, and collect energy crystals.
 
 ## Features
 
-- **3D Space Environment**: Procedurally generated starfield with planets and asteroids
-- **WASD Controls**: Move your spaceship with WASD keys
-  - W/↑: Forward
-  - S/↓: Backward  
-  - A/←: Strafe left
-  - D/→: Strafe right
-  - Space: Move up
-  - Ctrl: Move down
-- **Mouse Look**: Click and drag mouse to look around (pointer lock enabled)
-- **HUD Display**: Real-time speed and position readout
-- **Smooth Physics**: Velocity-based movement with inertia and friction
+- **Third-person chase camera** that banks with the ship and widens its field of view while boosting
+- **Procedural assets**: nebula sky shader, twinkling starfield, banded gas giants with atmospheres, a ringed ice giant, and displaced-rock asteroids. All textures are generated at runtime, so there are no image files.
+- **Post-processing**: HDR bloom, ACES tone mapping and image-based lighting from the nebula
+- **Combat**: dual wingtip lasers with heat management, enemy drone waves that orbit and lead their shots, and destructible asteroids that split into smaller rocks
+- **Pickups**: energy crystals (score, shield, boost) and repair kits (hull)
+- **Ship systems**: hull, regenerating shields, boost energy and weapon heat
+- **HUD**: score panel, radar in the ship's own frame, target brackets with range, off-screen threat arrows, damage vignette
+- **Synthesized audio** via WebAudio (no audio files)
+- **Touch controls** on phones and tablets (stick plus thrust, brake, fire and boost buttons)
+- Menu, pause and game-over screens; the best score is saved locally
 
 ## Getting Started
 
-### Installation
-
 ```bash
 npm install
+npm run dev     # http://localhost:5173/
+npm run build   # production build in dist/
 ```
 
-### Development
+## Controls
 
-```bash
-npm run dev
-```
+| Input | Action |
+|-------|--------|
+| Mouse | Steer (click the game to lock the pointer) |
+| W / ↑ | Thrust |
+| S / ↓ | Brake / reverse |
+| A / D | Strafe |
+| R / F | Rise / sink |
+| Left click / Space | Fire |
+| Shift (with W) | Boost |
+| Esc / P | Pause |
+| M | Mute |
 
-The game will open at `http://localhost:5173/`
+## Code Layout
 
-### Build
-
-```bash
-npm build
-```
-
-## Game Mechanics
-
-- Navigate through space populated with planets (Jupiter, Saturn, Neptune-like), a sun, and asteroid fields
-- Movement uses physics-based velocity with friction for smooth controls
-- Boundary limits keep the player from wandering too far (±2000 units)
-- Maximum speed limit to prevent unlimited acceleration
-
-## Controls Reference
-
-| Key | Action |
-|-----|--------|
-| W / ↑ | Move forward |
-| S / ↓ | Move backward |
-| A / ← | Strafe left |
-| D / → | Strafe right |
-| Space | Move up |
-| Ctrl | Move down |
-| Mouse | Look around (click to enable pointer lock) |
-
-## Future Enhancements
-
-- Landing on planets
-- Space stations to visit
-- Procedural galaxy generation
-- Mining asteroids
-- Combat with space pirates
-- Multiplayer exploration
-- Improved textures and models
-- Sound effects and music
-
-## Technology Stack
-
-- **Three.js**: 3D graphics library
-- **Vite**: Modern build tool and dev server
-- **JavaScript**: Pure vanilla JS, no frameworks
+| File | Purpose |
+|------|---------|
+| `src/main.js` | Renderer, post-processing, camera, game states and main loop |
+| `src/game.js` | Asteroids, enemy waves, lasers, pickups and collisions |
+| `src/player.js` | Flight physics and ship systems |
+| `src/ship.js` | Player ship model and engine and shield effects |
+| `src/objects.js` | Sky, stars, sun, planets and asteroid meshes |
+| `src/textures.js` | Procedural canvas textures |
+| `src/effects.js` | Pooled particle system (exhaust, sparks, explosions) |
+| `src/hud.js` | HUD gauges, radar and target overlay |
+| `src/controls.js` | Keyboard, mouse and touch input |
+| `src/audio.js` | Synthesized sound effects |
 
 ## License
 
