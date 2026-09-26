@@ -1,10 +1,9 @@
-export default {
-  server: {
-    port: 5173,
-    open: true
-  },
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  base: './',
   build: {
-    target: 'esnext',
-    minify: 'terser'
-  }
-}
+    target: 'es2020',
+    chunkSizeWarningLimit: 1200,
+  },
+});

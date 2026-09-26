@@ -1,79 +1,56 @@
-# Space Explorer - 3D Space Game
+# Stellar Drift
 
-A quick prototype 3D space exploration game built with Three.js and Vite.
+A 3D space flight game built with Three.js. Pilot the Kestrel through an uncharted star system and recover all 30 energy cores as fast as you can.
 
-## Features
-
-- **3D Space Environment**: Procedurally generated starfield with planets and asteroids
-- **WASD Controls**: Move your spaceship with WASD keys
-  - W/↑: Forward
-  - S/↓: Backward  
-  - A/←: Strafe left
-  - D/→: Strafe right
-  - Space: Move up
-  - Ctrl: Move down
-- **Mouse Look**: Click and drag mouse to look around (pointer lock enabled)
-- **HUD Display**: Real-time speed and position readout
-- **Smooth Physics**: Velocity-based movement with inertia and friction
-
-## Getting Started
-
-### Installation
+## Run it
 
 ```bash
 npm install
+npm run dev        # http://localhost:5173
+npm run build      # production build in dist/
+npm run preview    # serve the production build
 ```
 
-### Development
+`dist/` is fully static (relative asset paths), so it deploys as-is to Vercel, Netlify, or GitHub Pages.
 
-```bash
-npm run dev
+## Controls
+
+| Input | Action |
+|-------|--------|
+| Mouse | Steer (click the game to lock the pointer; or drag) |
+| W / S | Thrust / reverse |
+| A / D | Strafe |
+| Space / C | Rise / descend |
+| Q / E | Roll |
+| Shift | Boost (drains energy, cores refill it) |
+| M | Mute |
+| Esc / P | Pause |
+
+## What's in it
+
+- **Procedural planets**: textures generated at load from 3D noise (seamless). They include an Earth-like world with clouds and polar ice, a lava world with glowing cracks, an ice world, and two banded gas giants (one with rings and a storm). There is also a cratered moon.
+- **Atmospheres**: sun-aware Fresnel rim and halo shaders.
+- **Animated sun**: a noise-driven surface shader with a corona sprite and HDR bloom.
+- **Nebula skybox**: an fbm shader, also used as the environment map for metal reflections.
+- **Starfield**: 6,000 twinkling colored stars, plus parallax space dust for a sense of speed.
+- **Asteroid belt**: 1,800 instanced, noise-deformed, tumbling rocks with collisions.
+- **Orbital station**: a rotating habitat ring, solar arrays, and blinking beacons.
+- **Ship**: modeled from primitives, with a particle engine exhaust, banking, and a chase camera with FOV kick and shake.
+- **Post-processing**: bloom, chromatic aberration (scales with boost), vignette, film grain, and an impact flash.
+- **HUD**: radar, target markers with distances, an off-screen arrow to the nearest core, and screen-space lens flares.
+- **Synthesized audio**: engine hum, boost rumble, collection chimes, and impact thuds.
+- **Scoring**: collection chains, a mission timer, and a best time saved locally.
+
+## Structure
+
 ```
-
-The game will open at `http://localhost:5173/`
-
-### Build
-
-```bash
-npm build
+src/
+  main.js            game state, loop, camera, collisions
+  ship.js            ship model + flight model
+  hud.js             HUD, radar, markers, lens flares
+  postfx.js          bloom + lens shader pipeline
+  input.js, audio.js
+  noise.js, glsl.js  CPU Perlin noise, GLSL simplex noise
+  world/             sky, sun, planets, textures, asteroids, station, cores
+  effects/           exhaust particles, collection bursts
 ```
-
-## Game Mechanics
-
-- Navigate through space populated with planets (Jupiter, Saturn, Neptune-like), a sun, and asteroid fields
-- Movement uses physics-based velocity with friction for smooth controls
-- Boundary limits keep the player from wandering too far (±2000 units)
-- Maximum speed limit to prevent unlimited acceleration
-
-## Controls Reference
-
-| Key | Action |
-|-----|--------|
-| W / ↑ | Move forward |
-| S / ↓ | Move backward |
-| A / ← | Strafe left |
-| D / → | Strafe right |
-| Space | Move up |
-| Ctrl | Move down |
-| Mouse | Look around (click to enable pointer lock) |
-
-## Future Enhancements
-
-- Landing on planets
-- Space stations to visit
-- Procedural galaxy generation
-- Mining asteroids
-- Combat with space pirates
-- Multiplayer exploration
-- Improved textures and models
-- Sound effects and music
-
-## Technology Stack
-
-- **Three.js**: 3D graphics library
-- **Vite**: Modern build tool and dev server
-- **JavaScript**: Pure vanilla JS, no frameworks
-
-## License
-
-MIT

@@ -1,84 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Space Game</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stellar Drift</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2 L20 14 L30 16 L20 18 L16 30 L12 18 L2 16 L12 14 Z' fill='%235ef2ff'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="game"></canvas>
+    <div id="flares"></div>
+    <div id="markers"></div>
 
-    body {
-      font-family: 'Courier New', monospace;
-      background: #000;
-      color: #0f0;
-      overflow: hidden;
-    }
+    <div id="hud" class="hidden">
+      <div class="panel top-left">
+        <div class="title">STELLAR DRIFT</div>
+        <div class="stat"><span>ENERGY CORES</span><b id="cores">0 / 0</b></div>
+        <div class="stat"><span>MISSION TIME</span><b id="timer">00:00</b></div>
+      </div>
 
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-    }
+      <div class="top-center">
+        <div class="t-label">NEAREST CORE</div>
+        <div class="t-dist" id="target-dist">—</div>
+      </div>
 
-    #hud {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 14px;
-      text-shadow: 0 0 10px #0f0;
-      z-index: 10;
-    }
+      <div class="panel bottom-left">
+        <div class="speed"><span id="speed">0</span><small>M/S</small></div>
+        <div class="bar-label"><span>BOOST</span><kbd>SHIFT</kbd></div>
+        <div class="bar boost"><div id="boost-bar"></div></div>
+        <div class="bar-label"><span>THRUST</span><kbd>W</kbd></div>
+        <div class="bar thrust"><div id="throttle-bar"></div></div>
+      </div>
 
-    #hud div {
-      margin-bottom: 10px;
-    }
+      <div class="panel bottom-right">
+        <canvas id="radar" width="200" height="200"></canvas>
+      </div>
 
-    #crosshair {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 2px solid #0f0;
-      z-index: 10;
-    }
+      <div id="reticle"></div>
+      <div id="steer"></div>
+      <div id="message"></div>
+      <div id="heat">⚠ STELLAR HEAT — PULL AWAY</div>
+    </div>
 
-    #crosshair::before,
-    #crosshair::after {
-      content: '';
-      position: absolute;
-      background: #0f0;
-    }
+    <div id="overlay" data-mode="loading">
+      <div class="menu">
+        <div class="eyebrow">NORTHSTAR SECTOR · EXPLORATION RUN</div>
+        <h1>STELLAR <span>DRIFT</span></h1>
+        <p class="tagline" id="tagline">
+          Pilot the Kestrel through an uncharted star system and recover every energy core.
+        </p>
+        <div id="loading"><div class="spinner"></div><span id="loading-text">Initializing…</span></div>
+        <div id="result" class="hidden"></div>
+        <button id="start" class="btn hidden">LAUNCH</button>
+        <div class="controls">
+          <div><kbd>Mouse</kbd> Steer</div>
+          <div><kbd>W</kbd><kbd>S</kbd> Thrust / Reverse</div>
+          <div><kbd>A</kbd><kbd>D</kbd> Strafe</div>
+          <div><kbd>Space</kbd><kbd>C</kbd> Rise / Descend</div>
+          <div><kbd>Q</kbd><kbd>E</kbd> Roll</div>
+          <div><kbd>Shift</kbd> Boost</div>
+          <div><kbd>M</kbd> Mute</div>
+          <div><kbd>Esc</kbd> Pause</div>
+        </div>
+      </div>
+    </div>
 
-    #crosshair::before {
-      width: 2px;
-      height: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      top: -12px;
-    }
-
-    #crosshair::after {
-      width: 2px;
-      height: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      bottom: -12px;
-    }
-  </style>
-</head>
-<body>
-  <div id="hud">
-    <div>SPACE EXPLORER v0.1</div>
-    <div id="speed">Speed: 0.00</div>
-    <div id="position">Pos: (0, 0, 0)</div>
-  </div>
-  <div id="crosshair"></div>
-  <script type="module" src="/src/main.js"></script>
-</body>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
